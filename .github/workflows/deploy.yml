@@ -1,0 +1,46 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::YOUR_ACCOUNT_ID:role/github-actions-role
+        aws-region: ap-northeast-2
+
+    - name: setup terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: terraform init
+      run: terraform -chdir=terraform init
+
+    - name: terraform apply
+      run: terraform -chdir=terraform apply -auto-approve
+
+    - name: install ansible
+      run: |
+        sudo apt update
+        sudo apt install ansible -y
+
+    - name: generate inventory
+      run: bash scripts/gen_inventory.sh
+
+    - name: run ansible
+      run: |
+        ansible-playbook -i ansible/inventory.ini ansible/nginx.yml
