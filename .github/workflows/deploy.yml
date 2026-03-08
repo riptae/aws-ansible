@@ -38,6 +38,12 @@ jobs:
         sudo apt update
         sudo apt install ansible -y
 
+    - name: Create SSH key
+      run: |
+        mkdir -p /home/runner/.ssh
+        echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > /home/runner/.ssh/t-key
+        chmod 600 /home/runner/.ssh/t-key
+
     - name: generate inventory
       run: bash scripts/gen_inventory.sh
 
