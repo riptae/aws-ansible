@@ -7,5 +7,5 @@ ec2 ansible_host=${IP}
 
 [web:vars]
 ansible_user=ubuntu
-ansible_ssh_private_key_file=~/.ssh/t-key
+ansible_ssh_private_key_file=/home/runner/.ssh/t-key
 EOF
