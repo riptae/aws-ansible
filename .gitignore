@@ -5,4 +5,4 @@ crash.log
 *.log
 .terraform.lock.hcl
 t-key
-t-key.pub
+# t-key.pub
