@@ -9,4 +9,3 @@ web ansible_host=${IP}
 ansible_user=ubuntu
 ansible_ssh_private_key_file=~/.ssh/t-key
 EOF
-#
