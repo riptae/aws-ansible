@@ -106,6 +106,6 @@ resource "aws_instance" "ec2" {
   # ec2-user 비밀번호 설정
   echo 'ubuntu:password' | chpasswd
   EOF
-
+  #c
 
 }
