@@ -95,7 +95,8 @@ resource "aws_instance" "ec2" {
   instance_type = "t3.micro"
 
   subnet_id = aws_subnet.public_a.id
-
+  key_name = aws_key_pair.ec2_key.key_name
+  
   vpc_security_group_ids = [
     aws_security_group.ec2_sg.id
   ]
